@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Logos</string>
+
+    <string name="service_logo_endpoint">http://logos-api.funkreich.de</string>
+</resources>
