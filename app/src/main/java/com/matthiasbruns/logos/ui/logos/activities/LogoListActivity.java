@@ -12,7 +12,7 @@ import android.support.v7.app.AppCompatActivity;
  * Created by mbruns on 30/11/2016.
  */
 
-public class LogoActivity extends BaseActivity{
+public class LogoListActivity extends BaseActivity{
 
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {

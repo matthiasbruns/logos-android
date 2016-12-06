@@ -1,11 +1,10 @@
 package com.matthiasbruns.logos.ui;
 
 import com.matthiasbruns.logos.R;
-import com.matthiasbruns.logos.ui.logos.activities.LogoActivity;
+import com.matthiasbruns.logos.ui.logos.activities.LogoListActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 public class LauncherActivity extends BaseActivity {
 
@@ -18,6 +17,6 @@ public class LauncherActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        startActivity(new Intent(getApplicationContext(), LogoActivity.class));
+        startActivity(new Intent(getApplicationContext(), LogoListActivity.class));
     }
 }

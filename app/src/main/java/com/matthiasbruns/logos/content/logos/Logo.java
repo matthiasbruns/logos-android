@@ -145,4 +145,17 @@ public class Logo implements LogoContract.Logo {
     public void setUrl(final String url) {
         mUrl = url;
     }
+
+    @Override
+    public String toString() {
+        return "Logo{" +
+                "mExternalId='" + mExternalId + '\'' +
+                ", mId=" + mId +
+                ", mLogoUrl='" + mLogoUrl + '\'' +
+                ", mName='" + mName + '\'' +
+                ", mShortName='" + mShortName + '\'' +
+                ", mSource='" + mSource + '\'' +
+                ", mUrl='" + mUrl + '\'' +
+                '}';
+    }
 }

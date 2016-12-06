@@ -57,6 +57,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'
+    compile 'com.afollestad.material-dialogs:core:0.9.1.0'
 
     // Networking
     compile 'com.google.code.gson:gson:2.8.0'

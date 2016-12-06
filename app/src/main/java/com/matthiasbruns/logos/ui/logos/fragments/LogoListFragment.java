@@ -1,11 +1,10 @@
 package com.matthiasbruns.logos.ui.logos.fragments;
 
 import com.matthiasbruns.logos.R;
-import com.matthiasbruns.logos.ui.logos.LogoListView;
+import com.matthiasbruns.logos.ui.BaseTiFragment;
 import com.matthiasbruns.logos.ui.logos.presenters.LogoListPresenter;
+import com.matthiasbruns.logos.ui.logos.views.LogoListView;
 import com.matthiasbruns.logos.views.VerticalSpaceItemDecoration;
-
-import net.grandcentrix.thirtyinch.TiFragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -24,7 +23,7 @@ import butterknife.ButterKnife;
  * Created by mbruns on 30/11/2016.
  */
 
-public class LogoListFragment extends TiFragment<LogoListPresenter, LogoListView>
+public class LogoListFragment extends BaseTiFragment<LogoListPresenter, LogoListView>
         implements LogoListView {
 
     @BindView(R.id.recycler_view)
@@ -36,17 +35,13 @@ public class LogoListFragment extends TiFragment<LogoListPresenter, LogoListView
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container,
             @Nullable final Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_logos_list, container, false);
+        return inflater.inflate(R.layout.fragment_logo_list, container, false);
     }
 
     @Override
     public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        mRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(getContext());
@@ -55,6 +50,10 @@ public class LogoListFragment extends TiFragment<LogoListPresenter, LogoListView
         mRecyclerView.addItemDecoration(new DividerItemDecoration(mRecyclerView.getContext(),
                 mLayoutManager.getOrientation()));
         mRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration());
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
     }
 
     @NonNull

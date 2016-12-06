@@ -6,6 +6,17 @@
     <!-- Domain strings -->
     <string name="logo">Logo</string>
 
+    <!-- Global strings -->
+    <string name="progress_dialog_loading_title">Loading</string>
+    <string name="progress_dialog_loading_message">Working hard. Please wait.</string>
+    <string name="dialog_error_title">Error</string>
+    <string name="dialog_action_ok">OK</string>
+
     <!-- Endpoints -->
     <string name="service_logo_endpoint">http://logos-api.funkreich.de</string>
+
+    <!-- Logo detail strings -->
+    <string name="logo_detail_error_invalid_logo_id">Invalid logo id received.</string>
 </resources>
+
+

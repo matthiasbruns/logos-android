@@ -1,4 +1,4 @@
-package com.matthiasbruns.logos.ui.logos;
+package com.matthiasbruns.logos.ui.logos.views;
 
 import net.grandcentrix.thirtyinch.TiView;
 import net.grandcentrix.thirtyinch.distinctuntilchanged.DistinctUntilChanged;

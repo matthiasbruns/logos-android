@@ -10,7 +10,9 @@ import com.matthiasbruns.logos.util.GlideHelper;
 import android.content.Context;
 import android.graphics.drawable.PictureDrawable;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +36,7 @@ public class LogosAdapter extends RecyclerView.Adapter<LogosAdapter.ViewHolder> 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.logo_image)
         ImageView mImageView;
@@ -45,10 +47,29 @@ public class LogosAdapter extends RecyclerView.Adapter<LogosAdapter.ViewHolder> 
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(final View view) {
+            Log.d(TAG, "onClick " + getAdapterPosition());
+            for (final ItemClickListener listener : mItemClickListeners) {
+                listener.onClick(view, getAdapterPosition());
+            }
         }
     }
 
+    public interface ItemClickListener {
+
+        void onClick(final View view, final int position);
+    }
+
+    private static final String TAG = LogosAdapter.class.getName();
+
     private WeakReference<Context> mContextWeakReference;
+
+    @NonNull
+    private List<ItemClickListener> mItemClickListeners;
 
     private List<Logo> mLogos;
 
@@ -59,6 +80,11 @@ public class LogosAdapter extends RecyclerView.Adapter<LogosAdapter.ViewHolder> 
         mContextWeakReference = new WeakReference<>(context);
         mLogos = new ArrayList<>();
         mRequestBuilder = new GlideHelper().getSVGLoader(context);
+        mItemClickListeners = new ArrayList<>();
+    }
+
+    public void addClickListener(@NonNull final ItemClickListener itemClickListener) {
+        mItemClickListeners.add(itemClickListener);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -88,6 +114,10 @@ public class LogosAdapter extends RecyclerView.Adapter<LogosAdapter.ViewHolder> 
                 .inflate(R.layout.list_item_logo, parent, false);
 
         return new ViewHolder(view);
+    }
+
+    public void removeClickListener(@NonNull final ItemClickListener itemClickListener) {
+        mItemClickListeners.remove(itemClickListener);
     }
 
     public void setLogos(final List<Logo> logos) {

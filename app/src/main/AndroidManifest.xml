@@ -22,7 +22,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.logos.activities.LogoActivity" />
+        <activity android:name=".ui.logos.activities.LogoListActivity" />
+        <activity android:name=".ui.logos.activities.LogoDetailActivity" />
 
         <provider
             android:name=".content.logos.providers.LogoContentProvider"

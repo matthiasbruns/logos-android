@@ -60,7 +60,7 @@ public class LogosApplication extends Application {
         ContentResolver.setIsSyncable(syncAccount, LogoContract.AUTHORITY, 1);
         ContentResolver.setSyncAutomatically(syncAccount, LogoContract.AUTHORITY, true);
         ContentResolver
-                .addPeriodicSync(syncAccount, LogoContract.AUTHORITY, Bundle.EMPTY, 10);
+                .addPeriodicSync(syncAccount, LogoContract.AUTHORITY, Bundle.EMPTY, 60 * 60 * 24);
         ContentResolver.requestSync(syncAccount, LogoContract.AUTHORITY, Bundle.EMPTY);
 
         return syncAccount;
