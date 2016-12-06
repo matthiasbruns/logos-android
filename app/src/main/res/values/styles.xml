@@ -1,11 +1,96 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <!--Buttons-->
+
+    <style name="ButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@color/white_primary</item>
+        <item name="android:minHeight">@dimen/button_min_height</item>
     </style>
 
+    <!--Texts-->
+
+    <style name="H1">
+        <item name="fontPath">fonts/Roboto-Light.ttf</item>
+        <item name="android:textSize">52sp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
+    <style name="H1.Thin" parent="@style/H1">
+        <item name="fontPath">fonts/Roboto-Thin.ttf</item>
+    </style>
+
+    <style name="H2" parent="H1">
+        <item name="android:textSize">48sp</item>
+    </style>
+
+    <style name="H2.Thin" parent="@style/H2">
+        <item name="fontPath">fonts/Roboto-Thin.ttf</item>
+    </style>
+
+    <style name="H3" parent="H2">
+        <item name="android:textSize">40sp</item>
+    </style>
+
+    <style name="H3.Thin" parent="@style/H3">
+        <item name="fontPath">fonts/Roboto-Thin.ttf</item>
+    </style>
+
+    <style name="H4" parent="H2">
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="H4.Thin" parent="@style/H4">
+        <item name="fontPath">fonts/Roboto-Thin.ttf</item>
+    </style>
+
+    <style name="H5" parent="H2">
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="H5.Thin" parent="@style/H5">
+        <item name="fontPath">fonts/Roboto-Thin.ttf</item>
+    </style>
+
+    <style name="H6" parent="H2">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="H6.Thin" parent="@style/H6">
+        <item name="fontPath">fonts/Roboto-Thin.ttf</item>
+    </style>
+
+    <style name="Label">
+        <item name="fontPath">fonts/Roboto-Bold.ttf</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Thin">
+        <item name="fontPath">fonts/Roboto-Thin.ttf</item>
+    </style>
+
+    <!--Toolbar TextAppearance-->
+
+    <style name="TransparentText" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/transparent</item>
+    </style>
+
+    <style name="BlackText" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="SettingsEditTextTheme">
+        <item name="colorControlNormal">@color/white_hint</item>
+    </style>
+
+    <style name="ExpandedAppBar" parent="@android:style/TextAppearance.Medium">
+        <item name="fontPath">fonts/Roboto-Light.ttf</item>
+    </style>
+
+    <style name="CollapsedAppBar" parent="@android:style/TextAppearance.Medium">
+        <item name="fontPath">fonts/Roboto-Light.ttf</item>
+    </style>
 </resources>
+
+

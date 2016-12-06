@@ -1,5 +1,11 @@
 <resources>
-    <string name="app_name">Logos</string>
+    <!-- Utility strings -->
+    <string name="app_name">Logo</string>
+    <string name="accessibility_overflow">accessibility_overflow</string>
 
+    <!-- Domain strings -->
+    <string name="logo">Logo</string>
+
+    <!-- Endpoints -->
     <string name="service_logo_endpoint">http://logos-api.funkreich.de</string>
 </resources>

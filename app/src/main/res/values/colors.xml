@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="primary">#0277BD</color>
+    <color name="primary_bright">#039BE5</color>
+    <color name="primary_dark">#01579B</color>
+
+    <color name="dark_primary">#1E2020</color>
+    <color name="dark_primary_bright">#2f3333</color>
+    <color name="dark_primary_dark">#131414</color>
+
+    <color name="accent">#FF3D00</color>
+    <color name="accent_bright">#FF9E80</color>
+    <color name="accent_dark">#DD2C00</color>
+
+    <color name="error">#F44336</color>
+    <color name="warning">#FF9800</color>
+    <color name="success">#4CAF50</color>
+
+    <color name="white">#FFffffff</color>
+    <color name="white_translucent_15">#25ffffff</color>
+    <color name="white_translucent_90">#e6ffffff</color>
+    <color name="white_dividers">#26ffffff</color>
+    <color name="white_disabled">#4Dffffff</color>
+    <color name="white_disabled_solid">#cecece</color>
+    <color name="white_hint">@color/white_disabled</color>
+    <color name="white_secondary">#B3ffffff</color>
+    <color name="white_primary">@color/white</color>
+
+    <color name="black">#FF000000</color>
+    <color name="black_dividers">#26000000</color>
+    <color name="black_disabled">#40000000</color>
+    <color name="black_disabled_solid">#474747</color>
+    <color name="black_hint">@color/black_disabled</color>
+    <color name="black_secondary">#8C000000</color>
+    <color name="black_primary">#D9000000</color>
+
+    <color name="grey600">@color/black_disabled_solid</color>
 </resources>

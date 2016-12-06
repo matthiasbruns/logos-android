@@ -1,6 +1,7 @@
 package com.matthiasbruns.logos.network;
 
 import com.matthiasbruns.logos.R;
+import com.matthiasbruns.logos.content.logos.Logo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

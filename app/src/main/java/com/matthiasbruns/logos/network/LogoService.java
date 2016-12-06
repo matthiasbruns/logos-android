@@ -1,9 +1,10 @@
 package com.matthiasbruns.logos.network;
 
+import com.matthiasbruns.logos.content.logos.Logo;
+
 import java.util.List;
 
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 
