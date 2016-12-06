@@ -37,12 +37,12 @@ public class LogosApplication extends Application {
                 .build());
 
         sAccount = createSyncAccount(getApplicationContext());
-
-        /*mConfig = new Config(getApplicationContext());
+        mConfig = new Config(getApplicationContext());
         if (mConfig.isFirstLaunch()) {
             mConfig.setFirstLaunch(false);
+            ContentResolver.requestSync(sAccount, LogoContract.AUTHORITY, Bundle.EMPTY);
+        }
 
-        }*/
     }
 
     private Account createSyncAccount(Context context) {
@@ -61,7 +61,6 @@ public class LogosApplication extends Application {
         ContentResolver.setSyncAutomatically(syncAccount, LogoContract.AUTHORITY, true);
         ContentResolver
                 .addPeriodicSync(syncAccount, LogoContract.AUTHORITY, Bundle.EMPTY, 60 * 60 * 24);
-        ContentResolver.requestSync(syncAccount, LogoContract.AUTHORITY, Bundle.EMPTY);
 
         return syncAccount;
     }

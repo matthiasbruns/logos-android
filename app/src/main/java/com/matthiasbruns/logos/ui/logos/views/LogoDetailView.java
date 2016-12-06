@@ -7,6 +7,7 @@ import net.grandcentrix.thirtyinch.distinctuntilchanged.DistinctUntilChanged;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.IntRange;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
@@ -42,6 +43,14 @@ public interface LogoDetailView extends TiView {
     void onData(@Nullable final Logo logo);
 
     void setLoading(final boolean loading);
+
+    @DistinctUntilChanged
+    @MainThread
+    void setLogoImage(@NonNull Drawable drawable);
+
+    @DistinctUntilChanged
+    @MainThread
+    void setToolbarColor(int rgb);
 
     void showError(final String error);
 

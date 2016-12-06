@@ -51,6 +51,13 @@ public class LogosSyncAdapter extends AbstractThreadedSyncAdapter {
 
         mLogoService
                 .get()
+                .map(logos -> {
+                    // Delete all
+                    mContentResolver
+                            .delete(LogoContract.Logo.UriBuilder.getInstance().buildDeleteUri(),
+                                    null, null);
+                    return logos;
+                })
                 .flatMapIterable(logos -> logos)
                 .map(logo -> {
                     mContentResolver.insert(LogoContract.Logo.CONTENT_URI, logo.getContentValues());

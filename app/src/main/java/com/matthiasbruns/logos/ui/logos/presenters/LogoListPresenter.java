@@ -59,12 +59,13 @@ public class LogoListPresenter extends TiPresenter<LogoListView> {
         rxHelper.manageViewSubscription(
                 Observable.create((Observable.OnSubscribe<Logo>) subscriber -> {
                     mLogosAdapter.addClickListener((view, position) -> {
-                        final Logo logo = mLogosAdapter.getLogos().get(position);
-                        final Intent intent = LogoDetailActivity
-                                .create(getView().getContext(), logo.getId());
-                        getView().getContext().startActivity(intent);
+                        subscriber.onNext(mLogosAdapter.getLogos().get(position));
                     });
-                }).subscribe()
+                }).subscribe(logo -> {
+                    final Intent intent = LogoDetailActivity
+                            .create(getView().getContext(), logo.getId());
+                    getView().getContext().startActivity(intent);
+                })
         );
 
     }

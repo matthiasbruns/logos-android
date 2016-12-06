@@ -75,7 +75,6 @@ public class LogosAdapter extends RecyclerView.Adapter<LogosAdapter.ViewHolder> 
 
     private GenericRequestBuilder<Uri, InputStream, SVG, PictureDrawable> mRequestBuilder;
 
-
     public LogosAdapter(final Context context) {
         mContextWeakReference = new WeakReference<>(context);
         mLogos = new ArrayList<>();

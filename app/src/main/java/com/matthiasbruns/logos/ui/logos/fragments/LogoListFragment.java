@@ -35,14 +35,15 @@ public class LogoListFragment extends BaseTiFragment<LogoListPresenter, LogoList
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container,
             @Nullable final Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_logo_list, container, false);
+        super.onCreateView(inflater, container, savedInstanceState);
+        final View view = inflater.inflate(R.layout.fragment_logo_list, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
     public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
-
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -50,10 +51,6 @@ public class LogoListFragment extends BaseTiFragment<LogoListPresenter, LogoList
         mRecyclerView.addItemDecoration(new DividerItemDecoration(mRecyclerView.getContext(),
                 mLayoutManager.getOrientation()));
         mRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration());
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        mRecyclerView.setHasFixedSize(true);
     }
 
     @NonNull
@@ -65,6 +62,9 @@ public class LogoListFragment extends BaseTiFragment<LogoListPresenter, LogoList
     @Override
     public void setAdapter(@NonNull final RecyclerView.Adapter adapter) {
         mRecyclerView.setAdapter(adapter);
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
     }
 
     @Override

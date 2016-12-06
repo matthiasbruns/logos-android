@@ -6,16 +6,22 @@ import com.matthiasbruns.logos.content.logos.Logo;
 import com.matthiasbruns.logos.ui.BaseTiFragment;
 import com.matthiasbruns.logos.ui.logos.presenters.LogoDetailPresenter;
 import com.matthiasbruns.logos.ui.logos.views.LogoDetailView;
+import com.matthiasbruns.logos.util.ToolbarColorizeHelper;
 
 import android.app.Dialog;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Observable;
 import rx.Subscriber;
@@ -26,6 +32,15 @@ import rx.Subscriber;
 
 public class LogoDetailFragment extends BaseTiFragment<LogoDetailPresenter, LogoDetailView>
         implements LogoDetailView {
+
+    @BindView(R.id.collapsing_toolbar)
+    protected CollapsingToolbarLayout mCollapsingToolbar;
+
+    @BindView(R.id.logo_image)
+    protected ImageView mLogoImageView;
+
+    @BindView(R.id.logo_title)
+    protected TextView mLogoTitleTextView;
 
     private Dialog mLoadingDialog;
 
@@ -65,7 +80,7 @@ public class LogoDetailFragment extends BaseTiFragment<LogoDetailPresenter, Logo
 
     @Override
     public void onData(@Nullable final Logo logo) {
-        Log.d(TAG, logo.toString());
+        mLogoTitleTextView.setText(logo.getName());
     }
 
     @NonNull
@@ -85,6 +100,18 @@ public class LogoDetailFragment extends BaseTiFragment<LogoDetailPresenter, Logo
             // only create a new one, if there is no dialog
             mLoadingDialog = showLoadingDialog();
         }
+    }
+
+    @Override
+    public void setLogoImage(@NonNull final Drawable drawable) {
+        mLogoImageView.setImageDrawable(drawable);
+    }
+
+    @Override
+    public void setToolbarColor(final int rgb) {
+        mCollapsingToolbar.setBackgroundColor(rgb);
+        mCollapsingToolbar.setContentScrimColor(rgb);
+        mCollapsingToolbar.setStatusBarScrimColor(rgb);
     }
 
     @Override
