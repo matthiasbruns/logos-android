@@ -39,110 +39,79 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/card_horizontal_padding"
+            android:paddingRight="@dimen/card_horizontal_padding">
 
-            <android.support.v7.widget.CardView
+            <ImageView
+                android:id="@+id/img_logo_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                app:cardCornerRadius="4dp"
-                app:cardUseCompatPadding="true">
+                android:minHeight="250dp"
+                android:minWidth="250dp"
+                android:scaleType="centerInside" />
 
-                <ImageView
-                    android:id="@+id/img_logo_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:minHeight="250dp"
-                    android:minWidth="250dp"
-                    android:scaleType="centerInside" />
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
+            <TextView
+                style="@style/H5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:cardCornerRadius="4dp"
-                app:cardUseCompatPadding="true">
+                android:text="@string/logo_detail_title" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingLeft="@dimen/card_horizontal_padding"
-                    android:paddingRight="@dimen/card_horizontal_padding">
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TableRow>
 
                     <TextView
-                        style="@style/H5"
+                        style="@style/Label"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/logo_detail_title" />
+                        android:layout_marginRight="@dimen/activity_horizontal_padding"
+                        android:text="@string/logo_detail_source_title" />
 
-                    <TableLayout
+                    <TextView
+                        android:id="@+id/txt_logo_source"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:ellipsize="end"
+                        android:maxLines="1" />
+                </TableRow>
 
-                        <TableRow>
+                <TableRow>
 
-                            <TextView
-                                style="@style/H6"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/activity_horizontal_padding"
-                                android:text="@string/logo_detail_source_title" />
+                    <TextView
+                        style="@style/Label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/activity_horizontal_padding"
+                        android:text="@string/logo_detail_url_title" />
 
-                            <TextView
-                                android:id="@+id/txt_logo_source"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:ellipsize="end"
-                                android:maxLines="1" />
-                        </TableRow>
+                    <TextView
+                        android:id="@+id/txt_logo_url"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autoLink="web"
+                        android:ellipsize="end"
+                        android:maxLines="1" />
+                </TableRow>
+            </TableLayout>
 
-                        <TableRow>
-
-                            <TextView
-                                style="@style/H6"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/activity_horizontal_padding"
-                                android:text="@string/logo_detail_url_title" />
-
-                            <TextView
-                                android:id="@+id/txt_logo_url"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:autoLink="web"
-                                android:ellipsize="end"
-                                android:maxLines="1" />
-                        </TableRow>
-                    </TableLayout>
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-            <LinearLayout
+            <Button
+                android:id="@+id/btn_logo_detail_company"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="4dp"
-                android:paddingRight="4dp"
-                android:paddingTop="@dimen/activity_vertical_padding">
+                android:layout_marginTop="@dimen/activity_vertical_padding"
+                android:layout_marginBottom="@dimen/action_vertical_padding"
+                android:text="@string/btn_logo_detail_company" />
 
-                <Button
-                    android:id="@+id/btn_logo_detail_company"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/action_horizontal_padding"
-                    android:layout_weight="1"
-                    android:text="@string/btn_logo_detail_company" />
-
-                <Button
-                    android:id="@+id/btn_logo_detail_download"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/btn_logo_detail_download" />
-            </LinearLayout>
+            <Button
+                android:id="@+id/btn_logo_detail_download"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_logo_detail_download" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

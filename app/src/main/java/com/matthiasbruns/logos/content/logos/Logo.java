@@ -5,10 +5,14 @@ import com.google.gson.annotations.SerializedName;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import java.util.Comparator;
+
 /**
  * Created by mbruns on 30/11/2016.
  */
 public class Logo implements LogoContract.Logo {
+
+    public static final Comparator<Logo> ALPHABETICAL_COMPARATOR = (a, b) -> a.getName().compareTo(b.getName());
 
     @SerializedName("id")
     public String mExternalId;

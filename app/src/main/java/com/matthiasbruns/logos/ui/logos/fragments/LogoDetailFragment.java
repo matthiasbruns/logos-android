@@ -1,6 +1,7 @@
 package com.matthiasbruns.logos.ui.logos.fragments;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.jakewharton.rxbinding.view.RxView;
 import com.matthiasbruns.logos.R;
 import com.matthiasbruns.logos.content.logos.Logo;
 import com.matthiasbruns.logos.ui.BaseTiFragment;
@@ -10,6 +11,7 @@ import com.matthiasbruns.logos.util.Coloring;
 import com.matthiasbruns.logos.util.ToolbarColorizeHelper;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,8 +19,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -65,6 +72,10 @@ public class LogoDetailFragment extends BaseTiFragment<LogoDetailPresenter, Logo
     private Dialog mLoadingDialog;
 
     private Long mLogoId;
+
+    private Observable<Void> mOnLogoClicked;
+
+    private ShareActionProvider mShareActionProvider;
 
     @Override
     public void applyLogoColor(final int rgb) {
@@ -117,11 +128,24 @@ public class LogoDetailFragment extends BaseTiFragment<LogoDetailPresenter, Logo
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         Bundle bundle = savedInstanceState;
         if (bundle == null) {
             bundle = getArguments();
         }
         mLogoId = bundle.getLong(EXTRA_LOGO_ID);
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.detail, menu);
+        // Locate MenuItem with ShareActionProvider
+        MenuItem item = menu.findItem(R.id.menu_item_share);
+
+        // Fetch and store ShareActionProvider
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
     }
 
     @Nullable
@@ -130,6 +154,8 @@ public class LogoDetailFragment extends BaseTiFragment<LogoDetailPresenter, Logo
             @Nullable final Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_logo_detail, container, false);
         ButterKnife.bind(this, view);
+        mOnLogoClicked = RxView.clicks(mLogoImageView);
+        getBaseActivity().setSupportActionBar(mToolbar);
         return view;
     }
 
@@ -142,8 +168,19 @@ public class LogoDetailFragment extends BaseTiFragment<LogoDetailPresenter, Logo
 
     @NonNull
     @Override
+    public Observable<Void> onLogoClicked() {
+        return mOnLogoClicked;
+    }
+
+    @NonNull
+    @Override
     public LogoDetailPresenter providePresenter() {
         return new LogoDetailPresenter();
+    }
+
+    @Override
+    public void rotateLogo() {
+        mLogoImageView.animate().rotation(360).start();
     }
 
     @Override
@@ -162,6 +199,13 @@ public class LogoDetailFragment extends BaseTiFragment<LogoDetailPresenter, Logo
     @Override
     public void setLogoImage(@NonNull final Drawable drawable) {
         mLogoImageView.setImageDrawable(drawable);
+    }
+
+    @Override
+    public void setShareIntent(Intent shareIntent) {
+        if (mShareActionProvider != null) {
+            mShareActionProvider.setShareIntent(shareIntent);
+        }
     }
 
     @Override

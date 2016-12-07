@@ -11,6 +11,7 @@ import android.content.Context;
 import android.graphics.drawable.PictureDrawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -66,20 +67,64 @@ public class LogosAdapter extends RecyclerView.Adapter<LogosAdapter.ViewHolder> 
 
     private static final String TAG = LogosAdapter.class.getName();
 
+    @NonNull
+    private final SortedList<Logo> mLogos = new SortedList<>(Logo.class,
+            new SortedList.Callback<Logo>() {
+                @Override
+                public boolean areContentsTheSame(final Logo oldItem, final Logo newItem) {
+                    return oldItem.equals(newItem);
+                }
+
+                @Override
+                public boolean areItemsTheSame(final Logo item1, final Logo item2) {
+                    return item1.getId() == item2.getId();
+                }
+
+                @Override
+                public int compare(final Logo o1, final Logo o2) {
+                    return Logo.ALPHABETICAL_COMPARATOR.compare(o1, o2);
+                }
+
+                @Override
+                public void onChanged(final int position, final int count) {
+                    notifyItemRangeChanged(position, count);
+                }
+
+                @Override
+                public void onInserted(final int position, final int count) {
+                    notifyItemRangeInserted(position, count);
+                }
+
+                @Override
+                public void onMoved(final int fromPosition, final int toPosition) {
+                    notifyItemMoved(fromPosition, toPosition);
+                }
+
+                @Override
+                public void onRemoved(final int position, final int count) {
+                    notifyItemRangeRemoved(position, count);
+                }
+            });
+
     private WeakReference<Context> mContextWeakReference;
 
     @NonNull
     private List<ItemClickListener> mItemClickListeners;
 
-    private List<Logo> mLogos;
-
     private GenericRequestBuilder<Uri, InputStream, SVG, PictureDrawable> mRequestBuilder;
 
     public LogosAdapter(final Context context) {
         mContextWeakReference = new WeakReference<>(context);
-        mLogos = new ArrayList<>();
         mRequestBuilder = new GlideHelper().getSVGLoader(context);
         mItemClickListeners = new ArrayList<>();
+    }
+
+    public void add(Logo logo) {
+        mLogos.add(logo);
+    }
+
+    public void add(List<Logo> logos) {
+        mLogos.addAll(logos);
     }
 
     public void addClickListener(@NonNull final ItemClickListener itemClickListener) {
@@ -92,8 +137,8 @@ public class LogosAdapter extends RecyclerView.Adapter<LogosAdapter.ViewHolder> 
         return mLogos.size();
     }
 
-    public List<Logo> getLogos() {
-        return mLogos;
+    public Logo getLogo(final int id) {
+        return mLogos.get(id);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -115,14 +160,32 @@ public class LogosAdapter extends RecyclerView.Adapter<LogosAdapter.ViewHolder> 
         return new ViewHolder(view);
     }
 
+    public void remove(Logo logo) {
+        mLogos.remove(logo);
+    }
+
+    public void remove(List<Logo> logos) {
+        mLogos.beginBatchedUpdates();
+        for (Logo logo : logos) {
+            mLogos.remove(logo);
+        }
+        mLogos.endBatchedUpdates();
+    }
+
     public void removeClickListener(@NonNull final ItemClickListener itemClickListener) {
         mItemClickListeners.remove(itemClickListener);
     }
 
-    public void setLogos(final List<Logo> logos) {
-        mLogos.clear();
+    public void replaceAll(final List<Logo> logos) {
+        mLogos.beginBatchedUpdates();
+        for (int i = mLogos.size() - 1; i >= 0; i--) {
+            final Logo model = mLogos.get(i);
+            if (!logos.contains(model)) {
+                mLogos.remove(model);
+            }
+        }
         mLogos.addAll(logos);
-        notifyDataSetChanged();
+        mLogos.endBatchedUpdates();
     }
 
     private void loadSVG(final Uri uri, final ImageView imageView) {

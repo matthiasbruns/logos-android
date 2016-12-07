@@ -15,6 +15,7 @@ import com.matthiasbruns.logos.util.GlideHelper;
 import net.grandcentrix.thirtyinch.TiPresenter;
 import net.grandcentrix.thirtyinch.rx.RxTiPresenterSubscriptionHandler;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Picture;
@@ -113,6 +114,18 @@ public class LogoDetailPresenter extends TiPresenter<LogoDetailView> {
                     return drawable;
                 })
                 .map(this::asBitmap)
+                .flatMap(bitmap ->
+                        Observable.create((Observable.OnSubscribe<Bitmap>) subscriber -> {
+                            final Intent shareIntent = new Intent();
+                            shareIntent.setAction(Intent.ACTION_SEND);
+                            final Logo logo = mOnLogoLoadedSubject.getValue();
+
+                            shareIntent.putExtra(Intent.EXTRA_TEXT,
+                                    logo.getName() + " " + logo.getLogoUrl());
+                            shareIntent.setType("text/plain");
+                            getView().setShareIntent(shareIntent);
+                        })
+                )
                 .flatMap(this::fromBitmap)
                 .subscribe(palette -> {
                     if (palette != null) {
@@ -136,7 +149,11 @@ public class LogoDetailPresenter extends TiPresenter<LogoDetailView> {
     }
 
     private void initViewSubscriptions() {
-
+        rxHelper.manageViewSubscription(getView()
+                .onLogoClicked().subscribe(aVoid -> {
+                    getView().rotateLogo();
+                })
+        );
     }
 
     private void loadLogos() {

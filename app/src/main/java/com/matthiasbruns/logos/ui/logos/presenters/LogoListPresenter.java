@@ -15,6 +15,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import rx.Observable;
 
 /**
@@ -24,6 +27,8 @@ import rx.Observable;
 public class LogoListPresenter extends TiPresenter<LogoListView> {
 
     private static final String TAG = LogoListPresenter.class.getName();
+
+    private List<Logo> mLoadedLogos;
 
     private RxLogoLoader mLogoLoader;
 
@@ -59,12 +64,19 @@ public class LogoListPresenter extends TiPresenter<LogoListView> {
         rxHelper.manageViewSubscription(
                 Observable.create((Observable.OnSubscribe<Logo>) subscriber -> {
                     mLogosAdapter.addClickListener((view, position) -> {
-                        subscriber.onNext(mLogosAdapter.getLogos().get(position));
+                        subscriber.onNext(mLogosAdapter.getLogo(position));
                     });
                 }).subscribe(logo -> {
                     final Intent intent = LogoDetailActivity
                             .create(getView().getContext(), logo.getId());
                     getView().getContext().startActivity(intent);
+                })
+        );
+
+        rxHelper.manageViewSubscription(getView().onSearchChanged().subscribe(query -> {
+                    final List<Logo> filteredLogoList = filter(mLoadedLogos, query);
+                    mLogosAdapter.replaceAll(filteredLogoList);
+                    getView().scrollToPosition(0);
                 })
         );
 
@@ -77,7 +89,8 @@ public class LogoListPresenter extends TiPresenter<LogoListView> {
         }
 
         mLogoLoader.observe().subscribe(logos -> {
-            mLogosAdapter.setLogos(logos);
+            mLogosAdapter.replaceAll(logos);
+            mLoadedLogos = logos;
             //getView().scrollToPosition(getView().getRetainedScrollPosition());
             getView().restoreLayoutManagerState();
         });
@@ -86,5 +99,17 @@ public class LogoListPresenter extends TiPresenter<LogoListView> {
         if (activity != null) {
             mLogoLoader.onStart((AppCompatActivity) activity);
         }
+    }
+
+    private static List<Logo> filter(List<Logo> logos, String query) {
+        final String lowerCaseQuery = query.toLowerCase();
+        final List<Logo> filteredLogoList = new ArrayList<>();
+        for (Logo logo : logos) {
+            final String text = logo.getName().toLowerCase();
+            if (text.contains(lowerCaseQuery)) {
+                filteredLogoList.add(logo);
+            }
+        }
+        return filteredLogoList;
     }
 }

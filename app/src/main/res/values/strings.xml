@@ -6,6 +6,10 @@
     <!-- Domain strings -->
     <string name="logo">Logo</string>
 
+    <!-- Menu strings -->
+    <string name="action_search">Search</string>
+    <string name="action_share">Share</string>
+
     <!-- Global strings -->
     <string name="progress_dialog_loading_title">Loading</string>
     <string name="progress_dialog_loading_message">Working hard. Please wait.</string>

@@ -22,7 +22,7 @@
     </style>
 
     <style name="H2" parent="H1">
-        <item name="android:textSize">48sp</item>
+        <item name="android:textSize">46sp</item>
     </style>
 
     <style name="H2.Thin" parent="@style/H2">
@@ -30,7 +30,7 @@
     </style>
 
     <style name="H3" parent="H2">
-        <item name="android:textSize">40sp</item>
+        <item name="android:textSize">32sp</item>
     </style>
 
     <style name="H3.Thin" parent="@style/H3">
@@ -38,7 +38,7 @@
     </style>
 
     <style name="H4" parent="H2">
-        <item name="android:textSize">32sp</item>
+        <item name="android:textSize">38sp</item>
     </style>
 
     <style name="H4.Thin" parent="@style/H4">
@@ -46,7 +46,7 @@
     </style>
 
     <style name="H5" parent="H2">
-        <item name="android:textSize">28sp</item>
+        <item name="android:textSize">24sp</item>
     </style>
 
     <style name="H5.Thin" parent="@style/H5">
@@ -54,7 +54,7 @@
     </style>
 
     <style name="H6" parent="H2">
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
     <style name="H6.Thin" parent="@style/H6">

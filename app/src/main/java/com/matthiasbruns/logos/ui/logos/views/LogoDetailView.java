@@ -8,6 +8,7 @@ import net.grandcentrix.thirtyinch.distinctuntilchanged.DistinctUntilChanged;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
@@ -46,11 +47,19 @@ public interface LogoDetailView extends TiView {
     @CallOnMainThread
     void onData(@Nullable final Logo logo);
 
+    @NonNull
+    Observable<Void> onLogoClicked();
+
+    @CallOnMainThread
+    void rotateLogo();
+
     void setLoading(final boolean loading);
 
     @DistinctUntilChanged
     @CallOnMainThread
     void setLogoImage(@NonNull Drawable drawable);
+
+    void setShareIntent(Intent intent);
 
     @DistinctUntilChanged
     @CallOnMainThread
