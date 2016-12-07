@@ -16,6 +16,14 @@
     <string name="service_logo_endpoint">http://logos-api.funkreich.de</string>
 
     <!-- Logo detail strings -->
+    <string name="logo_detail_title">Details</string>
+    <string name="logo_detail_url_title">Website</string>
+    <string name="logo_detail_logo_url_title">Download</string>
+    <string name="logo_detail_source_title">Source</string>
+
+    <string name="btn_logo_detail_company">Visit Website</string>
+    <string name="btn_logo_detail_download">Download Logo</string>
+
     <string name="logo_detail_error_invalid_logo_id">Invalid logo id received.</string>
 </resources>
 

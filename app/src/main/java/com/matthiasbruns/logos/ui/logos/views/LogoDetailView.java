@@ -3,13 +3,13 @@ package com.matthiasbruns.logos.ui.logos.views;
 import com.matthiasbruns.logos.content.logos.Logo;
 
 import net.grandcentrix.thirtyinch.TiView;
+import net.grandcentrix.thirtyinch.callonmainthread.CallOnMainThread;
 import net.grandcentrix.thirtyinch.distinctuntilchanged.DistinctUntilChanged;
 
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.IntRange;
-import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -29,6 +29,10 @@ public interface LogoDetailView extends TiView {
 
     String EXTRA_LOGO_ID = TAG + "_logo_id";
 
+    @DistinctUntilChanged
+    @CallOnMainThread
+    void applyLogoColor(int rgb);
+
     @NonNull
     Activity getActivity();
 
@@ -39,19 +43,17 @@ public interface LogoDetailView extends TiView {
     long getLogoId();
 
     @DistinctUntilChanged
-    @MainThread
+    @CallOnMainThread
     void onData(@Nullable final Logo logo);
 
     void setLoading(final boolean loading);
 
     @DistinctUntilChanged
-    @MainThread
+    @CallOnMainThread
     void setLogoImage(@NonNull Drawable drawable);
 
     @DistinctUntilChanged
-    @MainThread
-    void setToolbarColor(int rgb);
-
+    @CallOnMainThread
     void showError(final String error);
 
     @NonNull

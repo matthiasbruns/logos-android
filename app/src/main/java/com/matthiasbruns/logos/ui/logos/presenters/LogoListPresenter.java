@@ -78,6 +78,8 @@ public class LogoListPresenter extends TiPresenter<LogoListView> {
 
         mLogoLoader.observe().subscribe(logos -> {
             mLogosAdapter.setLogos(logos);
+            //getView().scrollToPosition(getView().getRetainedScrollPosition());
+            getView().restoreLayoutManagerState();
         });
 
         final Activity activity = getView().getActivity();

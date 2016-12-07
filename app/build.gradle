@@ -11,6 +11,7 @@ android {
         jackOptions {
             enabled true
         }
+        vectorDrawables.useSupportLibrary = true
 
         versionCode 1
         versionName "1.0"
@@ -48,6 +49,9 @@ dependencies {
     // Core
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.1.6'
+    compile 'com.jakewharton.rxbinding:rxbinding:1.0.0'
+    compile 'com.jakewharton.rxbinding:rxbinding-design:1.0.0'
+
     def thirtyinchVersion = '0.8.0-rc1'
     compile "net.grandcentrix.thirtyinch:thirtyinch:$thirtyinchVersion"
     compile "net.grandcentrix.thirtyinch:thirtyinch-rx:$thirtyinchVersion"

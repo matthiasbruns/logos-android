@@ -57,6 +57,7 @@ public class LogoDetailPresenter extends TiPresenter<LogoDetailView> {
         mLogoLoader = RxLogoLoader.Builder().mode(ContentLoader.MODE_FIND_ID).build();
         mRequestBuilder = new GlideHelper().getSVGLoader(view.getContext());
         initInternals();
+        initViewSubscriptions();
         loadLogos();
     }
 
@@ -116,19 +117,26 @@ public class LogoDetailPresenter extends TiPresenter<LogoDetailView> {
                 .subscribe(palette -> {
                     if (palette != null) {
                         int defaultColor = ContextCompat
-                                .getColor(getView().getContext(), R.color.primary);
+                                .getColor(getView().getContext(), R.color.dark_primary_bright);
 
-                        Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
-                        Palette.Swatch vibrantLightSwatch = palette.getLightVibrantSwatch();
-                        Palette.Swatch vibrantDarkSwatch = palette.getDarkVibrantSwatch();
-                        Palette.Swatch mutedSwatch = palette.getMutedSwatch();
-                        Palette.Swatch mutedLightSwatch = palette.getLightMutedSwatch();
-                        Palette.Swatch mutedDarkSwatch = palette.getDarkMutedSwatch();
-
-                        getView().setToolbarColor(palette.getMutedColor(defaultColor));
+                        int vibrantColor = palette.getVibrantColor(defaultColor);
+                        int dominantColor = palette.getDominantColor(defaultColor);
+                        if (vibrantColor != defaultColor) {
+                            getView().applyLogoColor(vibrantColor);
+                        } else {
+                            if (dominantColor != defaultColor) {
+                                getView().applyLogoColor(dominantColor);
+                            } else {
+                                getView().applyLogoColor(defaultColor);
+                            }
+                        }
                     }
                 })
         );
+    }
+
+    private void initViewSubscriptions() {
+
     }
 
     private void loadLogos() {

@@ -18,6 +18,27 @@ import android.text.TextUtils;
 public abstract class BaseTiFragment<P extends TiPresenter<V>, V extends TiView>
         extends TiFragment<P, V> {
 
+    protected BaseActivity getBaseActivity() {
+        return (BaseActivity) getActivity();
+    }
+
+    protected Dialog showLoadingDialog() {
+        return showLoadingDialog(false, true);
+    }
+
+    protected Dialog showLoadingDialog(final boolean cancelable, final boolean show) {
+        return showLoadingDialog(R.string.progress_dialog_loading_title,
+                R.string.progress_dialog_loading_message, cancelable, show);
+    }
+
+    protected Dialog showLoadingDialog(final int title, final int message,
+            final boolean cancelable, final boolean show) {
+        final String titleString = getString(title);
+        final String messageString = getString(message);
+
+        return showLoadingDialog(titleString, messageString, cancelable, show);
+    }
+
     protected Dialog showLoadingDialog(@Nullable final String title,
             @Nullable final String message,
             final boolean cancelable, final boolean show) {
@@ -38,22 +59,5 @@ public abstract class BaseTiFragment<P extends TiPresenter<V>, V extends TiView>
             dialog.show();
         }
         return dialog;
-    }
-
-    protected Dialog showLoadingDialog() {
-        return showLoadingDialog(false, true);
-    }
-
-    protected Dialog showLoadingDialog(final boolean cancelable, final boolean show) {
-        return showLoadingDialog(R.string.progress_dialog_loading_title,
-                R.string.progress_dialog_loading_message, cancelable, show);
-    }
-
-    protected Dialog showLoadingDialog(final int title, final int message,
-            final boolean cancelable, final boolean show) {
-        final String titleString = getString(title);
-        final String messageString = getString(message);
-
-        return showLoadingDialog(titleString, messageString, cancelable, show);
     }
 }
